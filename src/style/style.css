@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: start;
+}
+
+h2 {
+    font-size: medium;
+    font-weight: 700;
+}
+
+.write-task {
+    border: 1px solid #DBDBDB;
+    border-radius: 10px;
+    width: 750px;
+    margin: 25px 0;
+    padding: 10px 170px 40px 10px;
+    font-weight: 700;
+}
+.addBtn {
+    padding: 13px 28px;
+    background-color: #F44336;
+    border-radius: 6px;
+    color: white;
+    border: none;
+    font-weight: 700;
+}
+
+.addBtn:disabled{
+    opacity: 0.4;
+}
+
+.list {
+    list-style-type: none;
+    width: 750px;
+    padding: 0;
+}
+
+.taskList {
+    display: flex;
+    border-bottom: 1px solid #DEDEDE;
+    margin: 15px 15px 15px 0;
+    padding: 15px;
+}
+
+.leftDiv {
+    flex: 1;
+}
+
+.inputCheckbox {
+    width: 1.3em;
+    height: 1.3em;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.inputCheckbox:hover {
+    background-image: url(../images/image\ 118.png);
+}
+
+.textOfTask {
+    margin-left: 15px;
+    font-size: 16px;
+    width: 600px;
+    border: none;
+}
+.textOfTask:focus {
+    outline: none;
+}
+
+.editBtn {
+    background-image: url(../images/image\ 122.png);
+    background-color: rgb(255, 255, 255);
+    width: 19px;
+    height: 19px;
+    border: none;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.deleteBtn {
+    background-image: url(../images/image\ 114.png);
+    background-color: rgb(255, 255, 255);
+    width: 18px;
+    height: 18px;
+    border: none;
+    cursor: pointer;
+}
+
+.done .textOfTask {
+    text-decoration: line-through;
+}
+
+.done .editBtn {
+    display: none;
+}
+
+.done .inputCheckbox {
+    display: none;
+}
+
+.editTask {
+    border: 1px solid #40C245;
+    border-radius: 10px;
+    width: 600px;
+    padding: 10px 0 10px 25px;
+}
+
+.saveBtn {
+    font-weight: 700;
+    font-size: 16px;
+    color: #1C5AD2;
+    border: none;
+    background-color: white;
+}
