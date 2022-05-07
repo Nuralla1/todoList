@@ -1,4 +1,4 @@
-let todos = [];
+let todos = []; 
 
 let input = document.querySelector(".write-task");
 let btn = document.querySelector(".addBtn");
@@ -11,8 +11,9 @@ addEventListener("click", (e) => {
         filltodos();
         createItem(input.value);
         input.value = "";
-        btn.disabled = true;
         displayEmpty();
+        btn.disabled = true;
+        btn.style.backgroundColor="black";
         
     }
 
@@ -60,9 +61,21 @@ input.addEventListener("keypress", (event) => {
         filltodos();
         createItem(input.value);
         input.value = "";
+        displayEmpty();
         btn.disabled = true;
+        btn.style.backgroundColor="black";
     }
 })
+
+input.addEventListener("input", () => {
+    if(input.value !== "") {
+        btn.disabled = false;
+        btn.style.backgroundColor="#F44336";
+    } else {
+        btn.disabled = true;//этот ЭЛЗ нужен если инпут ввели и не отправили, а стерли, то кнопку сделать черной и дизейблд.
+        btn.style.backgroundColor="black";
+    }
+});
 
 function generateID() {
     return  "task" + parseInt(Math.random() * 100 + todos.length/0.031);
@@ -77,6 +90,7 @@ function filltodos() {
 }
 
 function createItem(value) {
+    let formattedDate = formatDate();
     let listItem = document.createElement("li");
     let leftDiv = document.createElement("div");
     let inputCheckbox = document.createElement("input");
@@ -87,11 +101,11 @@ function createItem(value) {
     listItem.className = "taskList";
     inputCheckbox.className = "inputCheckbox";
     inputCheckbox.type = "checkbox";
-    inputCheckbox.setAttribute("id", "inputChBox");
+    // inputCheckbox.setAttribute("id", "inputChBox");
     textInput.className = "textOfTask";
     textInput.type = "text";
     textInput.readOnly = "true";
-    textInput.value = value;
+    textInput.value = value + " " + formattedDate;
     editBtn.className = "editBtn";
     deleteBtn.className = "deleteBtn";
     list.appendChild(listItem);
@@ -100,27 +114,31 @@ function createItem(value) {
     leftDiv.appendChild(textInput);
     listItem.appendChild(editBtn);
     listItem.appendChild(deleteBtn);
-    // setTimeout(() => alert(`🛎 Не забудь про: ${value}`), 10000);
+    // setTimeout(() => alert(`🛎 Не забудь: ${value}`), 10000);
 }
-
-
-
 
 function displayEmpty() {
     if(list.childElementCount !== 1) {
-        console.log("ji");
         let emptyMessage = document.querySelector(".empty");
         emptyMessage.style.display = "none";
     } else {
-        emptyMessage.style.display = "";
+        let emptyMessage = document.querySelector(".empty");
+        emptyMessage.style.display = "inline-block";
     }
 }
 
+function formatDate() {
+    let date = new Date();
+    let myDate = [
+                    padTo2Digits(date.getDate()),
+                    padTo2Digits(date.getMonth() + 1),
+                    date.getFullYear()
+                ].join("/");
+    return myDate + " " + date.getHours() + ":" + date.getMinutes();   
 
-input.addEventListener("input", () => {
-        if(input.value !== "") {
-            btn.disabled = false;
-        } else {
-            btn.disabled = true;
-        }
-    });
+}
+
+function padTo2Digits (number) {
+    return number.toString().padStart(2, "0");
+} 
+
