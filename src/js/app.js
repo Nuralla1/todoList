@@ -8,8 +8,12 @@ let doneTask = document.querySelector(".done-list")
 
 addEventListener("click", (e) => {
     if(e.target === btn) {
-        filltodos();
-        createItem(input.value);
+        const newToDo = {};
+        newToDo.id = generateID();
+        newToDo.content = input.value;
+        newToDo.date = new Date();
+        todos.push(newToDo);
+        createItem(newToDo.content, newToDo.id);
         input.value = "";
         displayEmpty();
         btn.disabled = true;
@@ -18,6 +22,12 @@ addEventListener("click", (e) => {
     }
 
     if(e.target.className === "deleteBtn") {
+        const idOfDelItem = e.target.parentElement.id;
+        for(let i = 0; i < todos.length; i++) {
+            if(idOfDelItem === todos[i].id) {
+                todos.splice(i, 1);
+            }
+        }    
         e.target.parentElement.remove();
         displayEmpty();
         
@@ -45,21 +55,35 @@ addEventListener("click", (e) => {
 
     if(e.target.className === "saveBtn") {
         let newText = e.target.parentElement.children[0].children[1];
+        newText.value = newText.value.substring(0, newText.value.length - 17)
+        const idOfSavedItem = e.target.parentElement.id;
+        for(let i = 0; i < todos.length; i++) {
+            if(idOfSavedItem === todos[i].id) {
+                todos[i].content = newText.value;
+            }
+        } 
+        const formattedDate = formatDate(); 
         newText.classList.remove("editTask");
         newText.parentElement.children[0].style.display = "";
         e.target.parentElement.children[1].style.display = "";
         e.target.parentElement.children[2].style.display = "";
         e.target.parentElement.children[3].style.display = "none";
+        newText.value += " " + formattedDate;
         newText.readOnly = true;
         e.target.remove();
+        
     }
     
 })
 
 input.addEventListener("keypress", (event) => {
     if(event.key === "Enter") {
-        filltodos();
-        createItem(input.value);
+        const newToDo = {};
+        newToDo.id = generateID();
+        newToDo.content = input.value;
+        newToDo.date = new Date();
+        todos.push(newToDo);
+        createItem(newToDo.content, newToDo.id);
         input.value = "";
         displayEmpty();
         btn.disabled = true;
@@ -81,27 +105,19 @@ function generateID() {
     return  "task" + parseInt(Math.random() * 100 + todos.length/0.031);
 }
 
-function filltodos() {
-    let newToDo = {};
-    newToDo.id = generateID();
-    newToDo.content = input.value;
-    newToDo.date = new Date();
-    todos.push(newToDo);
-}
-
-function createItem(value) {
-    let formattedDate = formatDate();
-    let listItem = document.createElement("li");
-    let leftDiv = document.createElement("div");
-    let inputCheckbox = document.createElement("input");
-    let textInput = document.createElement("input");
-    let editBtn = document.createElement("button");
-    let deleteBtn = document.createElement("button");
+function createItem(value, id) {
+    const formattedDate = formatDate();
+    const listItem = document.createElement("li");
+    const leftDiv = document.createElement("div");
+    const inputCheckbox = document.createElement("input");
+    const textInput = document.createElement("input");
+    const editBtn = document.createElement("button");
+    const deleteBtn = document.createElement("button");
     leftDiv.className = "leftDiv";
     listItem.className = "taskList";
+    listItem.setAttribute("id", id);
     inputCheckbox.className = "inputCheckbox";
     inputCheckbox.type = "checkbox";
-    // inputCheckbox.setAttribute("id", "inputChBox");
     textInput.className = "textOfTask";
     textInput.type = "text";
     textInput.readOnly = "true";
