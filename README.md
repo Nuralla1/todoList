@@ -1,6 +1,10 @@
 # TODOLIST
 This is my first todolist project implemented with HTML, CSS, JS.
-![todolist image](./images/templateToDoList.png)
+<br/>
+<br/>
+![todolist image](./src/images/templateToDoList.png)
+<br/>
+<br/>
 ## Functionality
 Functionality of this project allows  you to:
 - add your task and get a reminder within 10 seconds;
