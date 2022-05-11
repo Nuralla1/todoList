@@ -130,7 +130,7 @@ function createItem(value, id) {
     leftDiv.appendChild(textInput);
     listItem.appendChild(editBtn);
     listItem.appendChild(deleteBtn);
-    // setTimeout(() => alert(`🛎 Не забудь: ${value}`), 10000);
+    setTimeout(() => alert(`🛎 Не забудь: ${value}`), 10000);
 }
 
 function displayEmpty() {
